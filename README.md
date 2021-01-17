@@ -16,30 +16,34 @@ The process uses pre-configured python scripts to generate all the steps of the 
   - https://www.kaggle.com/rounakbanik/the-movies-dataset/version/7#movies_metadata.csv
   
 This is the folder structure you should have at this point:
+```
 .
 +-- project_folder
 |   + file.py
 |   + file.csv
 |   + file.xml.gz
+```
 
 The scripts and the data files needs to be in the same folder in order for the scripts to read correctly
 
 4. From terminal run the script "1_package_install.sh"
-  - $ sh 1_package_install.sh
+```$ sh 1_package_install.sh```
 5. From terminal run the script "2_truefilm-extract-xml-from-gz.py"
-  - $ python3 2_truefilm-extract-xml-from-gz.py
+```$ python3 2_truefilm-extract-xml-from-gz.py```
 6. From terminal run the script "3_truefilm-transformation-pipeline.py"
-  - python3 3_truefilm-transformation-pipeline.py
+```python3 3_truefilm-transformation-pipeline.py```
 7. From terminal run the script "4_xml-title-extract.py"
-  - python3 4_xml-title-extract.py
+```python3 4_xml-title-extract.py```
 8. From terminal run the script "5_db-init.sh"
-  - $ sh 5_db-init.sh
+```$ sh 5_db-init.sh```
 9. At this point we need to initialize the user for our Postgres databse. the shell script started the postgres service for you, insert the following command when prompted
-  - $ CREATE ROLE truer WITH LOGIN PASSWORD 'filmaker';
-  - $ ALTER ROLE truer CREATEDB;
-  - $ \q 
+```
+$ CREATE ROLE truer WITH LOGIN PASSWORD 'filmaker';
+$ ALTER ROLE truer CREATEDB;
+$ \q 
+ ```
 9. From terminal run the script "6_load-to-postgres.py"
-  - python3 6_load-to-postgres.py
+```python3 6_load-to-postgres.py```
 
 At this point we completed the extraction, transformation and load of the data into the Postgres DB in the table true_film in the public schema. 
 
@@ -59,12 +63,12 @@ Install PgAdmin4
 
 
 To access the data you can use the following query to start exploring the data
-"
+```
 SELECT 
   * 
  FROM 
   public.true_film
-"
+```
 
 # ETL Analysis and Data EDA
 The full analysis on the data and approach end to end used for the ETL is described in more details in the file "eda-truefilm-etl-end-to-end.jpynb". There I explain the choices and the decisions made to transform the data. 
