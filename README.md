@@ -8,7 +8,8 @@ The pipeline is automatized but the user needs to run few commands through the T
 The process uses pre-configured python scripts to generate all the steps of the process. The first Python script initialize the Python environment and installs all the libraries needed. (NOTE: the $ indicates the terminal prompt and shouldn't be copied as part of the command line)
 
 1. Create a new project folder 
-2. In Terminal, run "$ git clone git@github.com:manfredimiraula/truefilm.git"
+2. In Terminal, run 
+```"$ git clone git@github.com:manfredimiraula/truefilm.git"```
   - This copies the files within the Git repository locally and allow to start the process. 
 3. Download the data files within the folder where you cloned the repository
   - https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-abstract.xml.gz
