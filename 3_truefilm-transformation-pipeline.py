@@ -56,7 +56,7 @@ temp = media_df.merge(wiki_df, how = 'left', on = 'title')
 final_df = temp[['title', 'budget', 'release_date', 'revenue', 'ratio','popularity', 'production_companies', 'abstract', 'url']]
 
 # by joining we inserted some additional duplication. We can remove it by ordering by ratio and taking the first 1000 entries
-final_df = final_df.sort_values('ratio', ascending = False).head(1000)
+final_df = final_df.sort_values('ratio', ascending = False).head(999)
 
 final_df.rename(columns = {
     'original_title':'title', 
