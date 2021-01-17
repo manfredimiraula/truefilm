@@ -44,7 +44,7 @@ media_df = media_df[['original_title', 'title', 'budget', 'release_date', 'reven
 # keep only the duplicates where the release_date is different
 media_df = media_df.drop_duplicates(subset=['release_date','title'], keep='first')
 
-# order by the ratio value and take the first 1000 entries
+# order by the ratio value and take the first 1000 entries. This reduces the data to join
 media_df = media_df.sort_values('ratio', ascending = False).head(1000)
 
 print('media_df is ready for merging')
@@ -54,6 +54,9 @@ temp = media_df.merge(wiki_df, how = 'left', on = 'title')
 
 # subsetting and renaming
 final_df = temp[['title', 'budget', 'release_date', 'revenue', 'ratio','popularity', 'production_companies', 'abstract', 'url']]
+
+# by joining we inserted some additional duplication. We can remove it by ordering by ratio and taking the first 1000 entries
+final_df = final_df.sort_values('ratio', ascending = False).head(1000)
 
 final_df.rename(columns = {
     'original_title':'title', 
