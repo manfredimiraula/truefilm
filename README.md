@@ -69,6 +69,7 @@ SELECT
  FROM 
   public.true_film
 ```
+NOTE: for testing purposes, I uploaded also the file "pre-load.csv". This file is used by the script "6_load-to-postgres.py" to load the Postgres db with the clean data. Since the extraction process takes roughly 1.30 hrs, I decided to have the final dataframe ready for inspection. 
 
 # ETL Analysis and Data EDA
 The full analysis on the data and approach end to end used for the ETL is described in more details in the file "eda-truefilm-etl-end-to-end.jpynb". There I explain the choices and the decisions made to transform the data. 
@@ -101,4 +102,5 @@ I did split the process in different .py files. This breaking points are not ran
 1. Assuming the pipeline has to be an ongoing process, it would make sense to store the raw data in a datalake (e.g. AWS S3 bucket) with the timestamp at which the data was scraped. As time passes, we should expect to see an increasing number of rows (i.e. it makes sense to me that the movie sector creates more and more movies over time). If we observe a lesser number of rows at a later point, when comparing the previous "snapshot" we should raise a flag to investigate if there is something wrong with the ingestion of the raw data. 
 2. Part of the checks that I would like to introduce are outlined in the file "eda-truefilm-etl-end-to-end.jpynb". For example, checking for duplication is an important check we should always carry. However, I also realise that duplication of data sometime is acceptable (e.g. when two movies have the same title but different release_date), thus there should be allignment between technical and business stakeholders to really understand the goal of the data and how the data should ultimately be used to craft a piepeline that make it easier to query the data for the ultimate-user. 
 3. I notices that some of the abstracts and URLs extracted form the wikipedia dump are inconsistent with movie titles. This makes sense since sometimes movie titles are similar to English (or other languages) words and composition of words. In order to have a cleaner output, we could think of implementing a simple NLP process by which we analyze the text in the abstract to take into account words that can be referred to the movie industry (e.g. produced, movie/film, actors, etc..). Currently we have some spurious data in the final database as some URLs refer to pages on Wikipedia that are not related to the movie title. With the data at hand I wasn't able to find a good way to parametrize the cleaning of those bits. 
+
 
